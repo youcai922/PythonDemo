@@ -1,8 +1,22 @@
+# QQ账号相关信息
 QQ:
   number:
   password:
 
-#力扣
+#力扣账号相关信息
 leetcode:
+  execute: false
+  username: 
+  password: 
+
+# 京东相关信息
+JD:
+  execute: false
+  username:
+  password:
+
+# 淘宝相关信息
+Taobao:
+  execute: false
   username:
   password:
