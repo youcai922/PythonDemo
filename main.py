@@ -10,18 +10,40 @@ import task.Taobao as Taobao
 # driver = webdriver.Chrome(executable_path='./chromedriver')
 # chromedriver已经添加环境变量
 driver = webdriver.Chrome()
+#cdp破解反爬虫
+driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+    "source": """
+　　    Object.defineProperty(navigator, 'webdriver', {
+　　      get: () => undefined
+　　    })
+　　  """
+})
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-automation'])
+options.add_experimental_option('useAutomationExtension', False)
+# options.add_argument("--disable-blink-features=AutomationControlled")
+
 if FileUtil.read_yaml("leetcode", "execute"):
     LeetcodeTask.loginLeetcode(driver)
 
 mobileEmulation = {'deviceName': 'iPhone X'}
-options = webdriver.ChromeOptions()
 options.add_experimental_option('mobileEmulation', mobileEmulation)
+options.add_experimental_option('excludeSwitches',['enable-automation'])
+options.add_experimental_option('useAutomationExtension', False)
 driver = webdriver.Chrome(chrome_options=options)
-
-
-if FileUtil.read_yaml("JD","execute"):
-    JDTask.JDLogin(driver)
-
+driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+    "source": """
+　　    Object.defineProperty(navigator, 'webdriver', {
+　　      get: () => undefined
+　　    })
+　　  """
+})
+#
+#
+# if FileUtil.read_yaml("JD","execute"):
+#     JDTask.JDLogin(driver)
+#
 if FileUtil.read_yaml("Taobao", "execute"):
     Taobao.TaobaoLogin(driver)
 
