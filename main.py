@@ -22,17 +22,24 @@ def read_yaml(n,k):
 # chromedriver已经添加环境变量
 driver = webdriver.Chrome()
 
-# 控制浏览器访问url地址
+# 访问力扣管网
 driver.get("https://leetcode.cn/")
+# 右上角的登录按钮
+driver.find_element("xpath",'//*[@id="lc-header"]/nav/div/div[2]/a[2]').click()
+time.sleep(1)
+# 账号密码登录
+driver.find_element("xpath",'/html/body/div[3]/div/div/div[1]/div/div/div[6]/div').click()
+time.sleep(1)
+# 输入用户名
+driver.find_element("xpath",'/html/body/div[3]/div/div/div[1]/div/div/div[3]/div/label/input').send_keys(read_yaml("leetcode","username"))
+# 输入密码
+driver.find_element("xpath",'/html/body/div[3]/div/div/div[1]/div/div/div[4]/div/label/input').send_keys(read_yaml("leetcode","password"))
+# 勾选用户协议
+driver.find_element("xpath",'/html/body/div[3]/div/div/div[1]/div/div/div[8]/div/span[1]/svg').click()
+# 登录
+driver.find_element("xpath",'/html/body/div[3]/div/div/div[1]/div/div/button/span').click()
 
-driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/nav/div/div[2]/a[2]').click()
-driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/div/div/div[6]/div').click()
-driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/div/div/div[3]/div/label/input').send_keys(read_yaml("leetcode","username"))
-driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/div/div/div[4]/div/label/input').send_keys(read_yaml("leetcode","password"))
-driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/div/div/div[8]/div/span[1]/svg').click()
-driver.find_element_by_xpath('/html/body/div[3]/div/div/div[1]/div/div/button/span').click()
 
-
-time.sleep(6)
-# 退出浏览器
-driver.quit()
+# time.sleep(6)
+# # 退出浏览器
+# driver.quit()
